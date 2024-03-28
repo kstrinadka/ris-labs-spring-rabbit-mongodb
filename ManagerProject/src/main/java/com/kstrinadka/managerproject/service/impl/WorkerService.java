@@ -4,22 +4,20 @@ import com.kstrinadka.managerproject.service.strats.util.WorkerTaskPair;
 import com.kstrinadka.managerproject.storage.Ticket;
 import lombok.Getter;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.kstrinadka.managerproject.net.WorkerSender;
-import com.kstrinadka.managerproject.service.WorkerService;
 import com.kstrinadka.managerproject.service.strats.AbstractTicketSplitter;
 import com.kstrinadka.managerproject.storage.TicketStorage;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
 @Service
-public class WorkerServiceImpl implements WorkerService
+public class WorkerService
 {
     private static final int THREAD_POOL_SIZE = 10;
     @Setter
@@ -30,10 +28,11 @@ public class WorkerServiceImpl implements WorkerService
     private final ExecutorService threadPool;
     private final WorkerSender workerSender;
     private final AbstractTicketSplitter ticketSplitter;
-    private static final Logger logger = LoggerFactory.getLogger(WorkerServiceImpl.class);
 
     @Autowired
-    public WorkerServiceImpl(TicketStorage ticketStorage, @Qualifier("rabbitMQWorkerSender") WorkerSender workerSender, @Qualifier("equal") AbstractTicketSplitter ticketSplitter)
+    public WorkerService(TicketStorage ticketStorage,
+                         @Qualifier("rabbitMQWorkerSender") WorkerSender workerSender,
+                         @Qualifier("equal") AbstractTicketSplitter ticketSplitter)
     {
         this.ticketSplitter = ticketSplitter;
         String workersNum = System.getenv("WORKERS_NUM");
@@ -46,7 +45,8 @@ public class WorkerServiceImpl implements WorkerService
     public void handleTicket(String ticketID)
     {
         Ticket curTicket = ticketStorage.getTicket(ticketID);
-        ticketSplitter.splitTicket(curTicket).stream().forEach(this::sendTask);
+        List<WorkerTaskPair> workerTaskPairs = ticketSplitter.splitTicket(curTicket);
+        workerTaskPairs.forEach(this::sendTask);
     }
 
     private void sendTask(WorkerTaskPair dto)

@@ -4,7 +4,6 @@ import com.kstrinadka.managerproject.dto.CrackDTO;
 import com.kstrinadka.managerproject.dto.TicketIdDTO;
 import com.kstrinadka.managerproject.exceptions.NoHashException;
 import com.kstrinadka.managerproject.exceptions.NoMaxLengthException;
-import com.kstrinadka.managerproject.service.ClientService;
 import com.kstrinadka.managerproject.storage.Status;
 import com.kstrinadka.managerproject.storage.Ticket;
 import com.kstrinadka.managerproject.storage.TicketStorage;
@@ -17,14 +16,14 @@ import com.kstrinadka.managerproject.dto.ResultDTO;
 import com.kstrinadka.managerproject.dto.UpdateDTO;
 
 @Service
-public class ClientServiceImpl implements ClientService
+public class ClientService
 {
     private final TicketStorage ticketStorage;
     private final MongoTemplate mongoTemplate;
-    private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
 
     @Autowired
-    public ClientServiceImpl(TicketStorage ticketStorage, MongoTemplate mongoTemplate) {
+    public ClientService(TicketStorage ticketStorage, MongoTemplate mongoTemplate) {
         this.ticketStorage = ticketStorage;
         this.mongoTemplate = mongoTemplate;
     }
@@ -65,7 +64,6 @@ public class ClientServiceImpl implements ClientService
         return null;
     }
 
-    @Override
     public void updateTicket(UpdateDTO dto) {
         ticketStorage.updateTicket(dto.getTicketID(), dto.getResult());
     }
