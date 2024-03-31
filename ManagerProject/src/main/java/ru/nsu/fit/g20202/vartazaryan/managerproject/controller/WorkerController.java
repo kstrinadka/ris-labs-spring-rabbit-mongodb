@@ -1,6 +1,6 @@
 package ru.nsu.fit.g20202.vartazaryan.managerproject.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,14 +10,11 @@ import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.ClientService;
 
 @RestController
 @RequestMapping("/internal/api/manager/hash/crack/request")
+@RequiredArgsConstructor
 public class WorkerController
 {
+    // todo - мб лучше пусть WorkerController дергает WorkerService???
     private final ClientService clientService;
-
-    @Autowired
-    public WorkerController(ClientService clientService) {
-        this.clientService = clientService;
-    }
 
     @PatchMapping
     public void updateTicket(@RequestBody UpdateDTO dto)
