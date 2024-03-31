@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.TaskDTO;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.net.WorkerSender;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.WorkerServiceImpl;
+import ru.nsu.fit.g20202.vartazaryan.managerproject.net.HttpWorkerSender;
+import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.WorkerService;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Ticket;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.TicketStorage;
 
@@ -22,11 +22,11 @@ import static org.mockito.Mockito.*;
 public class WorkerServiceTests
 {
     @Autowired
-    private WorkerServiceImpl workerServiceImpl;
+    private WorkerService workerService;
     @MockBean
     private TicketStorage ticketStorage;
     @MockBean
-    private WorkerSender workerSender;
+    private HttpWorkerSender workerSender;
     @MockBean
     private ExecutorService executorService;
 
@@ -40,17 +40,17 @@ public class WorkerServiceTests
     @Test
     public void handleTicket_1WorkersTest()
     {
-        workerServiceImpl.setWorkersNumber(1);
+        workerService.setWorkersNumber(1);
 
         UUID id = UUID.randomUUID();
         Ticket ticket = new Ticket(id, "abc", 3);
         when(ticketStorage.getTicket(anyString())).thenReturn(ticket);
 
-        workerServiceImpl.handleTicket(id.toString());
+        workerService.handleTicket(id.toString());
         verify(ticketStorage).getTicket(eq(id.toString()));
 
         ArgumentCaptor<TaskDTO> argumentCaptor = ArgumentCaptor.forClass(TaskDTO.class);
-        verify(workerSender, times(workerServiceImpl.getWorkersNumber())).sendTaskToWorker(argumentCaptor.capture(), anyInt());
+        verify(workerSender, times(workerService.getWorkersNumber())).sendTaskToWorker(argumentCaptor.capture(), anyInt());
     }
 
     /*@Test

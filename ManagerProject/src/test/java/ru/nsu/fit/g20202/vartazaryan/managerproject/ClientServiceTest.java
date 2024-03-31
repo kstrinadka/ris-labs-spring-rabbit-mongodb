@@ -1,18 +1,16 @@
 package ru.nsu.fit.g20202.vartazaryan.managerproject;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.ResultDTO;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.ClientService;
+import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.ClientService;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Status;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Ticket;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.TicketStorage;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 

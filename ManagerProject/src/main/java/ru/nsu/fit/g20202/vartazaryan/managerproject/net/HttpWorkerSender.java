@@ -13,7 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Component
-public class HttpWorkerSender implements WorkerSender
+public class HttpWorkerSender
 {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
@@ -25,7 +25,6 @@ public class HttpWorkerSender implements WorkerSender
         this.objectMapper = new ObjectMapper();
     }
 
-    @Override
     public int sendTaskToWorker(TaskDTO task, int worker)
     {
         String workerHost = "http://worker"+worker+":8080"+"/internal/api/worker/hash/crack/task";

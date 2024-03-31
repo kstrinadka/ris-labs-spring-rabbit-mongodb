@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.net.WorkerSender;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.WorkerService;
+import ru.nsu.fit.g20202.vartazaryan.managerproject.net.HttpWorkerSender;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats.AbstractTicketSplitter;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats.util.WorkerTaskPair;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Ticket;
@@ -20,8 +19,7 @@ import java.util.concurrent.Executors;
 
 
 @Service
-public class WorkerServiceImpl implements WorkerService
-{
+public class WorkerService {
     private static final int THREAD_POOL_SIZE = 10;
     @Setter
     @Getter
@@ -29,13 +27,13 @@ public class WorkerServiceImpl implements WorkerService
 
     private final TicketStorage ticketStorage;
     private final ExecutorService threadPool;
-    private final WorkerSender workerSender;
+    private final HttpWorkerSender workerSender;
     private final AbstractTicketSplitter ticketSplitter;
-    private static final Logger logger = LoggerFactory.getLogger(WorkerServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(WorkerService.class);
 
     @Autowired
-    public WorkerServiceImpl(TicketStorage ticketStorage, WorkerSender workerSender,
-                             @Qualifier("fixed") AbstractTicketSplitter ticketSplitter)
+    public WorkerService(TicketStorage ticketStorage, HttpWorkerSender workerSender,
+                         @Qualifier("fixed") AbstractTicketSplitter ticketSplitter)
     {
         this.ticketSplitter = ticketSplitter;
         String workersNum = System.getenv("WORKERS_NUM");

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.UpdateDTO;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.ClientService;
+import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.ClientService;
 
 @RestController
 @RequestMapping("/internal/api/manager/hash/crack/request")

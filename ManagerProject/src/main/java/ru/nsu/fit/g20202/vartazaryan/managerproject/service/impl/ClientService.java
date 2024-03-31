@@ -10,19 +10,17 @@ import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.ResultDTO;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.UpdateDTO;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.exceptions.NoHashException;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.exceptions.NoMaxLengthException;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.ClientService;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Status;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Ticket;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.TicketStorage;
 
 @Service
-public class ClientServiceImpl implements ClientService
-{
+public class ClientService {
     private final TicketStorage ticketStorage;
-    private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
 
     @Autowired
-    public ClientServiceImpl(TicketStorage ticketStorage)
+    public ClientService(TicketStorage ticketStorage)
     {
         this.ticketStorage = ticketStorage;
     }
@@ -61,7 +59,6 @@ public class ClientServiceImpl implements ClientService
         return null;
     }
 
-    @Override
     public void updateTicket(UpdateDTO dto)
     {
         ticketStorage.updateTicket(dto.getTicketID(), dto.getResult());

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.CrackDTO;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.ResultDTO;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.TicketIdDTO;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.ClientService;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.WorkerService;
+import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.ClientService;
+import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.WorkerService;
 
 @RestController
 @CrossOrigin(origins = "*")
