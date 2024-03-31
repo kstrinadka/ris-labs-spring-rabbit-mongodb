@@ -22,8 +22,8 @@ public class WorkerController
     @PatchMapping
     public void updateTicket(@RequestBody UpdateDTO dto)
     {
-        System.out.println("Updating ticket. Ticket id: "+dto.getTicketID());
-        System.out.println("Received data: "+dto.getResult());
+        System.out.println("Updating ticket. Ticket id: " + dto.getTicketID());
+        System.out.println("Received data: " + dto.getResult());
         clientService.updateTicket(dto);
     }
 }

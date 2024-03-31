@@ -22,7 +22,10 @@ public class EqualPartsTicketSplitter extends AbstractTicketSplitter
         initializeSplitting(ticket);
         List<WorkerTaskPair> tasks = new ArrayList<>();
 
-        long wordCount = (int)(SYMBOLS_IN_ALPHABET*(Math.pow(SYMBOLS_IN_ALPHABET, ticket.getMaxLength()) - 1)/(SYMBOLS_IN_ALPHABET - 1));
+        long wordCount = (int)(SYMBOLS_IN_ALPHABET*(Math.pow(
+                SYMBOLS_IN_ALPHABET, ticket.getMaxLength()) - 1)/(SYMBOLS_IN_ALPHABET - 1)
+        );
+
         long wordsPerWorker = wordCount / WORKERS_NUMBER;
         long remainingWords = wordCount % WORKERS_NUMBER;
         long curStart = 1;

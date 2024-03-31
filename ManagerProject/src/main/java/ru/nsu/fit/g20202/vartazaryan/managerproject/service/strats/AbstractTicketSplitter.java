@@ -3,7 +3,6 @@ package ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.TaskDTO;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats.impl.EqualPartsTicketSplitter;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats.util.WorkerTaskPair;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Ticket;
 

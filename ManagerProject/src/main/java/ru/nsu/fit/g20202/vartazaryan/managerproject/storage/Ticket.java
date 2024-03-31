@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Заявка на злом слова по его хешу.
+ */
 @Data
 public class Ticket
 {

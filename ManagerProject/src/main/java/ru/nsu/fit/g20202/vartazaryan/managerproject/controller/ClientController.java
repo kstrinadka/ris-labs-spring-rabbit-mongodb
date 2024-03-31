@@ -10,7 +10,6 @@ import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.ResultDTO;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.TicketIdDTO;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.ClientService;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.WorkerService;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.impl.ClientServiceImpl;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -32,10 +31,8 @@ public class ClientController
     public ResponseEntity<TicketIdDTO> crackHash(@RequestBody CrackDTO crackDTO)
     {
         logger.info("New crack hash request!");
-
         var ticketIdDTO = clientService.processRequest(crackDTO);
-
-        logger.info("Registered new ticket. ID = "+ticketIdDTO.getRequestId());
+        logger.info("Registered new ticket. ID = " + ticketIdDTO.getRequestId());
 
         workerService.handleTicket(ticketIdDTO.getRequestId());
 

@@ -8,8 +8,8 @@ import lombok.Data;
 public class TaskDTO
 {
     private String ticketID;
-    private long start;
-    private long checkAmount;
+    private long start;             //
+    private long checkAmount;       //
     private int maxLen;
     private String hash;
 }

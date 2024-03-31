@@ -9,13 +9,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.net.WorkerSender;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.WorkerService;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.dto.TaskDTO;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats.AbstractTicketSplitter;
-import ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats.TicketSplitter;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.service.strats.util.WorkerTaskPair;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.Ticket;
 import ru.nsu.fit.g20202.vartazaryan.managerproject.storage.TicketStorage;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -35,7 +34,8 @@ public class WorkerServiceImpl implements WorkerService
     private static final Logger logger = LoggerFactory.getLogger(WorkerServiceImpl.class);
 
     @Autowired
-    public WorkerServiceImpl(TicketStorage ticketStorage, WorkerSender workerSender, @Qualifier("fixed") AbstractTicketSplitter ticketSplitter)
+    public WorkerServiceImpl(TicketStorage ticketStorage, WorkerSender workerSender,
+                             @Qualifier("fixed") AbstractTicketSplitter ticketSplitter)
     {
         this.ticketSplitter = ticketSplitter;
         String workersNum = System.getenv("WORKERS_NUM");
@@ -48,7 +48,10 @@ public class WorkerServiceImpl implements WorkerService
     public void handleTicket(String ticketID)
     {
         Ticket curTicket = ticketStorage.getTicket(ticketID);
-        ticketSplitter.splitTicket(curTicket).stream().forEach(this::sendTask);
+        List<WorkerTaskPair> workerTaskPairs = ticketSplitter.splitTicket(curTicket);
+
+        // Отправляем воркерам их задачи
+        workerTaskPairs.forEach(this::sendTask);
     }
 
     private void sendTask(WorkerTaskPair dto)
