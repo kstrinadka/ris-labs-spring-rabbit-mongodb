@@ -50,7 +50,9 @@ public class ClientServiceTest
         when(ticketStorage.getTicket(anyString())).thenReturn(mockTicket);
 
         var res = clientService.getData("abcd");
-        assertThat(res).isEqualTo(new ResultDTO(Status.IN_PROGRESS, null));
+        assertThat(res).isEqualTo(ResultDTO.builder().status(Status.IN_PROGRESS).data(null)
+                .build()
+        );
     }
 
     @Test
@@ -60,7 +62,9 @@ public class ClientServiceTest
         when(ticketStorage.getTicket(anyString())).thenReturn(mockTicket);
 
         var res = clientService.getData("abcd");
-        assertThat(res).isEqualTo(new ResultDTO(Status.DONE, new ArrayList<>(){{add("abs");}}));
+        assertThat(res).isEqualTo(ResultDTO.builder().status(Status.DONE).data(new ArrayList<>(){{add("abs");}})
+                .build()
+        );
     }
 
     @Test
@@ -70,6 +74,8 @@ public class ClientServiceTest
         when(ticketStorage.getTicket(anyString())).thenReturn(mockTicket);
 
         var res = clientService.getData("abcd");
-        assertThat(res).isEqualTo(new ResultDTO(Status.ERROR, null));
+        assertThat(res).isEqualTo(ResultDTO.builder().status(Status.ERROR).data(null)
+                .build()
+        );
     }
 }
