@@ -3,9 +3,11 @@ package com.kstrinadka.managerproject.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Builder
 public class TicketIdDTO
 {
-    private String requestId;
+    private UUID requestId;
 }

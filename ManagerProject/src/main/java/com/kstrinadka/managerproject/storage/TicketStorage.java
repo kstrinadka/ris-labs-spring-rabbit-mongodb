@@ -43,11 +43,10 @@ public class TicketStorage implements Storage {
     @Override
     @Synchronized("updateLock")
     public TicketIdDTO addNewTicket(CrackDTO dto) {
-        UUID uuid = UUID.randomUUID();
-        Ticket t = new Ticket(uuid, dto.getHash(), dto.getMaxLength());
-        ticketStorageHashMap.put(uuid.toString(), t);
+        Ticket ticket = new Ticket(UUID.randomUUID(), dto.getHash(), dto.getMaxLength());
+        ticketStorageHashMap.put(ticket.getTicketId().toString(), ticket);
 
-        return TicketIdDTO.builder().requestId(uuid.toString())
+        return TicketIdDTO.builder().requestId(ticket.getTicketId())
                 .build();
     }
 

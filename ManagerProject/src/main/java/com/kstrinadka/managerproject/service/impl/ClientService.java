@@ -27,7 +27,7 @@ public class ClientService {
             throw new NoMaxLengthException();
 
         TicketIdDTO ticketIdDTO = ticketStorage.addNewTicket(dto);
-        log.info("New ticket registered!");
+        log.info("Registered new ticket. ID = " + ticketIdDTO.getRequestId());
 
         return ticketIdDTO;
     }

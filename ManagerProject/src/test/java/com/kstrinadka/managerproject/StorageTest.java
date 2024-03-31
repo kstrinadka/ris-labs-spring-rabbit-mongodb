@@ -46,7 +46,7 @@ public class StorageTest
         crackDTO.setMaxLength(2);
         TicketIdDTO ticketIdDTO = ticketStorage.addNewTicket(crackDTO);
 
-        Ticket savedTicket = ticketStorage.getTicket(ticketIdDTO.getRequestId());
+        Ticket savedTicket = ticketStorage.getTicket(ticketIdDTO.getRequestId().toString());
 
         assertEquals("hash", savedTicket.getHash());
         assertEquals(2, savedTicket.getMaxLength());
@@ -63,15 +63,15 @@ public class StorageTest
         TicketIdDTO ticketIdDTO = ticketStorage.addNewTicket(crackDTO);
 
         List<String> data = new ArrayList<>();
-        ticketStorage.updateTicket(ticketIdDTO.getRequestId(), data);
-        var t = ticketStorage.getTicket(ticketIdDTO.getRequestId());
+        ticketStorage.updateTicket(ticketIdDTO.getRequestId().toString(), data);
+        var t = ticketStorage.getTicket(ticketIdDTO.getRequestId().toString());
 
         assertEquals(Status.IN_PROGRESS, t.getStatus());
         assertTrue(t.getResult().isEmpty());
 
         data = List.of("abc");
-        ticketStorage.updateTicket(ticketIdDTO.getRequestId(), data);
-        t = ticketStorage.getTicket(ticketIdDTO.getRequestId());
+        ticketStorage.updateTicket(ticketIdDTO.getRequestId().toString(), data);
+        t = ticketStorage.getTicket(ticketIdDTO.getRequestId().toString());
 
         //assertEquals(Status.DONE, t.getStatus());
         //assertEquals("abc", t.getResult().get(0));
