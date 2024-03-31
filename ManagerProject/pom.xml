@@ -95,7 +95,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.nsu.fit.g20202.vartazaryan.managerproject.ManagerProjectApplication</mainClass>
+                            <mainClass>com.kstrinadka.managerproject.ManagerProjectApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

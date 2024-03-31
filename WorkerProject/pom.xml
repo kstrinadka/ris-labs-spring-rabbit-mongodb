@@ -78,7 +78,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.nsu.fit.g20202.vartazaryan.workerproject.WorkerProjectApplication</mainClass>
+                            <mainClass>com.kstrinadka.workerproject.WorkerProjectApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
